@@ -1,0 +1,21 @@
+name: weatherled
+version: 0.1
+summary: Show the weather on a BlinkStick
+description: Show the weather forecast for the next days on the BlinkStick
+confinement: devmode
+grade: stable
+
+apps:
+  bs:
+    command: bin/node $SNAP/bin/weatherled.js
+    daemon: simple
+parts:
+  blinkstick:
+    plugin: nodejs
+    source: https://github.com/arvydas/blinkstick-node.git
+    stage-packages: [libusb-dev]
+  move:
+    plugin: dump
+    source: src
+    organize:
+      weatherled.js: bin/weatherled.js
